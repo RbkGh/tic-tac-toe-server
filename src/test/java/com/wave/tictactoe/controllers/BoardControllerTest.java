@@ -90,6 +90,24 @@ class BoardControllerTest {
     }
 
     @Test
+    void should_expect_400_error_when_character_is_unknown() throws Exception {
+
+        String requestData = "LLL0o74ye";
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/?board=" + requestData)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+
+        requestData = "LLL0i74ye"; //remove the o which is a legal character and still expect a bad request as response
+        mockMvc.perform(MockMvcRequestBuilders
+                .get("/?board=" + requestData)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+
+    }
+
+    @Test
     void should_expect_o_with_8_spaces_after_it() throws Exception {
 
         String expectedResult = "o        ";

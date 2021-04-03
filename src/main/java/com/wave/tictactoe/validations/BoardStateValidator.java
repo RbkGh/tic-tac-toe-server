@@ -1,9 +1,11 @@
 package com.wave.tictactoe.validations;
 
+import com.wave.tictactoe.converters.BoardStateConverter;
 import com.wave.tictactoe.exceptions.InvalidBoardStateException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * author: acerbk
@@ -17,10 +19,22 @@ public class BoardStateValidator {
      * validate board state , whether optimal move can be generated or not, if board is not in a correct state,
      * {@link InvalidBoardStateException} is thrown which returns 400 status code in turn
      *
-     * @param boardMatrixArray
+     * @param boardStateString
      * @throws InvalidBoardStateException
      */
-    public static void validateBoardState(char[][] boardMatrixArray) throws InvalidBoardStateException {
+    public static void validateBoardState(String boardStateString) throws InvalidBoardStateException {
+
+        if (boardStateString.length() != 9)//string must not be less than or greater than 9
+            throw new InvalidBoardStateException();
+
+        String allPossibleCharsStripped = boardStateString
+                .replaceAll("o", "")
+                .replaceAll("x", "")
+                .replaceAll(Pattern.quote("+"), "");
+        if (!allPossibleCharsStripped.isEmpty()) //after stripping all possible characters,our string should be empty,otherwise, then we throw invalidboardstateexception
+            throw new InvalidBoardStateException();
+
+        char[][] boardMatrixArray = BoardStateConverter.convertToMatrixArray(boardStateString);
 
         Map<Character, Integer> characterFrequencyMap = new HashMap<>();
         //characters are either o,x or + only so we initially all to a count of zero

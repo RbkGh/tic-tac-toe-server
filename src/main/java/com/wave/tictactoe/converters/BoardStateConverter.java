@@ -18,11 +18,9 @@ public class BoardStateConverter {
      *
      * @param boardState
      * @return
-     * @throws InvalidBoardStateException
+     *
      */
     public static char[][] convertToMatrixArray(String boardState) throws InvalidBoardStateException {
-        if (boardState.length() != 9)//string must not be less than or greater than 9
-            throw new InvalidBoardStateException();
 
         char[] initialCharArray = boardState.toCharArray();
 

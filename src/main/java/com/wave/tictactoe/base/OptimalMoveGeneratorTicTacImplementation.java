@@ -3,7 +3,6 @@ package com.wave.tictactoe.base;
 import com.wave.tictactoe.converters.BoardStateConverter;
 import com.wave.tictactoe.exceptions.InvalidBoardStateException;
 import com.wave.tictactoe.models.SingleMove;
-import com.wave.tictactoe.validations.BoardStateValidator;
 
 /**
  * author: acerbk
@@ -22,10 +21,7 @@ public class OptimalMoveGeneratorTicTacImplementation implements OptimalMoveGene
     @Override
     public String generateOptimalMove(String currentBoardState) throws InvalidBoardStateException {
 
-
         char[][] boardStateArray = BoardStateConverter.convertToMatrixArray(currentBoardState);
-
-        BoardStateValidator.validateBoardState(boardStateArray);
 
         SingleMove optimalSingleMove = findOptimalSingleMove(boardStateArray);
 
