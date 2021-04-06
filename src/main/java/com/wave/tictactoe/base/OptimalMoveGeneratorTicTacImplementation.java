@@ -84,17 +84,17 @@ public class OptimalMoveGeneratorTicTacImplementation implements OptimalMoveGene
         // If Maximizer has won the game
         // return his/her evaluated score
         if (score == 10)
-            return score;
+            return score - depth;
 
         // If Minimizer has won the game
         // return his/her evaluated score
         if (score == -10)
-            return score;
+            return score - depth;
 
         // If there are no more moves and
         // no winner then it is a tie
         if (!areMovesRemaining(boardMatrixArray))
-            return 0;
+            return 0 - depth;
 
         // If this maximizer's move
         if (isMax) {

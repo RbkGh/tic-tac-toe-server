@@ -65,7 +65,7 @@ class BoardControllerTest {
     @Test
     void should_expect_another_correct_processing_of_optimal_move() throws Exception {
 
-        String expectedResult = "xooo   x ";
+        String expectedResult = "xo oo  x ";
 
         String requestData = "xo+o+++x+";
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
@@ -159,9 +159,26 @@ class BoardControllerTest {
     }
 
     @Test
-    void should_block_opponent_from_winning() throws Exception {
+    void something_here() throws Exception {
 
-        String expectedResult = "xxoo o   ";
+        String expectedResult = "o  o xo x";
+
+        String requestData = "o++o+x++x";
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+                .get("/?board=" + requestData)
+                .accept(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        String result = mvcResult.getResponse().getContentAsString();
+
+        Assert.isTrue(result.equals(expectedResult), "");
+    }
+
+    @Test
+    void should_win() throws Exception {
+
+        String expectedResult = "xx ooo   ";
 
         String requestData = "xx+o+o+++";
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
