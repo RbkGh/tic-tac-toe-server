@@ -24,8 +24,8 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @GetMapping(path = "/")
-    ResponseEntity<?> getOptimalMove(@RequestParam("board") String currentBoardState) throws InvalidBoardStateException {
+    @GetMapping
+    ResponseEntity<?> getOptimalMove(@RequestParam(value = "board") String currentBoardState) throws InvalidBoardStateException {
 
         currentBoardState = currentBoardState.replaceAll(" ", "+"); //we replace all space chars to + for processing
 
